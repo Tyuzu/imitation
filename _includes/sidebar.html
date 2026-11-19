@@ -1,0 +1,17 @@
+<aside class="nav-drawer" id="nav-drawer" :class="{ open: navOpen }">
+  <div class="drawer-header">
+    <span class="drawer-title">{{ site.title }}</span>
+  </div>
+
+  <div class="drawer-body">
+    <div class="drawer-section-label">NAVIGATION</div>
+    <nav class="drawer-nav">
+      {% for link in site.sidebar_nav %}
+        <a href="{{ link.url | relative_url }}" class="drawer-link {% if page.url == link.url %}active{% endif %}">
+          <span class="drawer-icon">{{ link.icon }}</span>
+          <span>{{ link.label }}</span>
+        </a>
+      {% endfor %}
+    </nav>
+  </div>
+</aside>

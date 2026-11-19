@@ -1,0 +1,49 @@
+- heading: "PAGES"
+  links:
+    - { title: "Home", url: "/" }
+    - { title: "About", url: "/about/" }
+    - { title: "Gallery", url: "/gallery/" }
+    - { title: "Video Studio", url: "/video-studio/" }
+    - { title: "Contact", url: "/contact/" }
+    - { title: "Sitemap", url: "/sitemap.xml" }
+
+- heading: "IMAGE TOOLS"
+  links:
+    - { title: "Image Compressor", url: "/image-compressor/" }
+    - { title: "Image Resizer", url: "/image-resizer/" }
+    - { title: "JPG to PNG", url: "/jpg-to-png/" }
+    - { title: "PNG to JPG", url: "/png-to-jpg/" }
+    - { title: "WebP Converter", url: "/webp-converter/" }
+    - { title: "PNG to WebP", url: "/png-to-webp/" }
+    - { title: "JPG to WebP", url: "/jpg-to-webp/" }
+    - { title: "Image Cropper", url: "/image-cropper/" }
+    - { title: "Image Rotator", url: "/image-rotator/" }
+    - { title: "Passport Photo", url: "/passport-photo/" }
+    - { title: "Image to Base64", url: "/image-to-base64/" }
+
+- heading: "PDF TOOLS"
+  links:
+    - { title: "Merge PDF", url: "/merge-pdf/" }
+    - { title: "Split PDF", url: "/split-pdf/" }
+    - { title: "Compress PDF", url: "/compress-pdf/" }
+    - { title: "JPG to PDF", url: "/jpg-to-pdf/" }
+    - { title: "PDF to Images", url: "/pdf-to-images/" }
+    - { title: "Rotate PDF", url: "/rotate-pdf/" }
+    - { title: "Delete Pages", url: "/delete-pages/" }
+    - { title: "Extract Pages", url: "/extract-pages/" }
+
+- heading: "SCANNER TOOLS"
+  links:
+    - { title: "Document Scanner", url: "/document-scanner/" }
+    - { title: "QR Code Scanner", url: "/qr-code-scanner/" }
+
+- heading: "VIDEO TOOLS"
+  links:
+    - { title: "Video Studio", url: "/video-studio/" }
+    - { title: "Video Trimmer", url: "/video-trimmer/" }
+    - { title: "Video Filters", url: "/video-filters/" }
+
+- heading: "UTILITIES"
+  links:
+    - { title: "Base64 to Image", url: "/base64-to-image/" }
+    - { title: "Image to Base64", url: "/image-to-base64/" }
