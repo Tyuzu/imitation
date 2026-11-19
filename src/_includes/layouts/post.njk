@@ -5,8 +5,14 @@ layout: layouts/base.njk
   <header class="post-header">
     <p class="eyebrow">ARTICLE</p>
     <h1>{{ title }}</h1>
-    {% if page.date %}<time datetime="{{ page.date | htmlDate }}">{{ page.date | readableDate }}</time>{% endif %}
-    {% if description %}<p class="post-description">{{ description }}</p>{% endif %}
+    {% if page.date %}
+    <time datetime="{{ page.date | htmlDate }}">{{ page.date | readableDate }}</time>
+    {% endif %}
+    {% if description %}
+    <p class="post-description">{{ description }}</p>
+    {% endif %}
   </header>
-  <div class="markdown-body">{{ content | safe }}</div>
+  <div class="markdown-body">
+    {{ content | safe }}
+  </div>
 </article>

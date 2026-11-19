@@ -1,10 +1,19 @@
-<aside class="nav-drawer" id="nav-drawer" :class="{ 'open': navOpen }">
-  <div class="drawer-header"><strong>{{ site.title }}</strong></div>
+<aside class="nav-drawer" id="nav-drawer" :class="{ 'open': navOpen }" :inert="!navOpen">
+  <div class="drawer-header">
+    <strong>{{ site.title }}</strong>
+    <button class="icon-btn" type="button" @click="navOpen = false" aria-label="Close navigation">✕</button>
+  </div>
   <nav class="drawer-nav" aria-label="Main navigation">
     {% for link in sidebar_nav %}
-      <a href="{{ link.url | url }}" class="drawer-link{% if page.url == link.url %} active{% endif %}">
-        <span aria-hidden="true">{{ link.icon }}</span>{{ link.label }}
-      </a>
+    {% set targetUrl = link.url | url %}
+    {% set isCurrent = page.url == targetUrl %}
+    <a href="{{ targetUrl }}"
+       class="drawer-link{% if isCurrent %} active{% endif %}"
+       {% if isCurrent %}aria-current="page"{% endif %}
+       @click="navOpen = false">
+      <span aria-hidden="true">{{ link.icon }}</span>
+      <span>{{ link.label }}</span>
+    </a>
     {% endfor %}
   </nav>
 </aside>

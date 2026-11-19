@@ -6,14 +6,24 @@
   <meta name="description" content="{{ description | default(site.description) | escape }}">
   <meta name="theme-color" content="#ffffff">
   {% if site.url and site.url != "https://example.com" %}
-  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  <link rel="canonical" href="{{ site.url }}{{ page.url | url }}">
   {% endif %}
   <title>{% if title %}{{ title | escape }} | {% endif %}{{ site.title | escape }}</title>
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem("imigi-theme");
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const theme = saved || (prefersDark ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      } catch (_) {}
+    })();
+  </script>
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
   <script defer src="{{ '/assets/js/main.js' | url }}"></script>
 </head>
-<body x-data="siteShell">
+<body x-data="siteShell" @keydown.escape.window="closeAll">
   <a class="skip-link" href="#main-content">Skip to content</a>
   <div class="app-shell">
     {% include "partials/rail.njk" %}
@@ -25,38 +35,42 @@
             :aria-expanded="navOpen.toString()" aria-controls="nav-drawer"
             :aria-label="navOpen ? 'Close navigation' : 'Open navigation'">☰</button>
           <a class="topbar-brand" href="{{ '/' | url }}">
-            <span class="brand-circle">{{ site.brand_letter }}</span>
+            <span class="brand-circle" aria-hidden="true">{{ site.brand_letter }}</span>
             <span>{{ site.title }}</span>
           </a>
         </div>
-        <div class="topbar-center" x-data="toolSearch">
+        <div class="topbar-center" x-data="toolSearch" @click.outside="open = false">
           <label class="visually-hidden" for="global-tool-search">Search tools</label>
           <input id="global-tool-search" type="search" placeholder="Search tools..."
-            x-model="query" @input="search" @keydown.escape="clear">
-          <div class="search-dropdown" x-show="open" x-cloak>
+            autocomplete="off" role="combobox" aria-autocomplete="list"
+            :aria-expanded="open.toString()" aria-controls="global-tool-results"
+            x-model="query" @input="search" @focus="if (query.trim()) open = true" @keydown.escape="clear">
+          <div id="global-tool-results" class="search-dropdown" role="listbox" x-show="open" x-cloak>
             <template x-for="item in matches" :key="item.url">
-              <a class="search-result-item" :href="item.url">
+              <a class="search-result-item" role="option" :href="item.url" @click="open = false">
                 <span x-text="item.title"></span>
                 <small x-text="item.category"></small>
               </a>
             </template>
-            <p x-show="matches.length === 0">No matching tools</p>
+            <p class="search-empty" x-show="matches.length === 0">No matching tools</p>
           </div>
         </div>
         <div class="topbar-right">
           <button class="pill-btn" type="button" @click="toggleTheme"
-            :aria-pressed="dark.toString()" aria-label="Toggle color theme">◐</button>
+            :aria-pressed="dark.toString()" :aria-label="dark ? 'Switch to light theme' : 'Switch to dark theme'">◐</button>
         </div>
       </header>
       <main id="main-content" class="workspace-main">
         <div class="workspace-container">
-          {% if show_ads != false %}<div class="ad-slot" aria-label="Advertisement">ADVERTISEMENT</div>{% endif %}
+          {% if show_ads != false %}
+          <aside class="ad-slot" aria-label="Advertisement">ADVERTISEMENT</aside>
+          {% endif %}
           {{ content | safe }}
         </div>
       </main>
       {% include "partials/footer.njk" %}
     </div>
   </div>
-  <script id="tool-index-data" type="application/json">{{ footer_directory | jsonify | safe }}</script>
+  <script id="tool-index-data" type="application/json">{{ footer_directory | dump | safe }}</script>
 </body>
 </html>

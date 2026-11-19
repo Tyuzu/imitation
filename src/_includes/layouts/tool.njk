@@ -1,11 +1,17 @@
 ---
 layout: layouts/base.njk
 ---
-<header class="tool-header">
-  {% if category_label %}<p class="eyebrow">{{ category_label }}</p>{% endif %}
-  <h1>{{ title }}</h1>
-  {% if description %}<p>{{ description }}</p>{% endif %}
-</header>
-<section class="tool-card">
-  {{ content | safe }}
-</section>
+<article class="tool-page">
+  <header class="tool-header">
+    {% if category_label %}
+    <p class="eyebrow">{{ category_label }}</p>
+    {% endif %}
+    <h1>{{ title }}</h1>
+    {% if description %}
+    <p class="tool-description">{{ description }}</p>
+    {% endif %}
+  </header>
+  <section class="tool-card" aria-label="{{ title | escape }}">
+    {{ content | safe }}
+  </section>
+</article>

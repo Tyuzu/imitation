@@ -1,4 +1,5 @@
 ---
+layout: layouts/post.njk
 title: Getting Started with Eleventy
 description: A short introduction to building a static site with Eleventy.
 date: 2026-11-10

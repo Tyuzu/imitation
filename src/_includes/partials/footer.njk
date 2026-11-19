@@ -2,17 +2,23 @@
   <div class="workspace-container">
     <div class="footer-grid">
       {% for col in footer_directory %}
-        <section class="footer-col">
-          <h2>{{ col.heading }}</h2>
-          <ul>{% for item in col.links %}
-            <li><a href="{{ item.url | url }}">{{ item.title }}</a></li>
-          {% endfor %}</ul>
-        </section>
+      <section class="footer-col">
+        <h2>{{ col.heading }}</h2>
+        <ul>
+          {% for item in col.links %}
+          <li><a href="{{ item.url | url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </section>
       {% endfor %}
     </div>
     <div class="footer-bottom">
       <span>{{ site.copyright }}</span>
-      <span><a href="/privacy-policy/">Privacy</a> · <a href="/terms-of-service/">Terms</a></span>
+      <nav class="footer-legal" aria-label="Legal">
+        <a href="{{ '/privacy-policy/' | url }}">Privacy</a>
+        <span aria-hidden="true">·</span>
+        <a href="{{ '/terms-of-service/' | url }}">Terms</a>
+      </nav>
     </div>
   </div>
 </footer>

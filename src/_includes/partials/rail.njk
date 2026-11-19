@@ -1,9 +1,11 @@
 <nav class="category-rail" aria-label="Tool categories">
   {% for item in rail_categories %}
-    <a href="{{ item.url | url }}" class="rail-item{% if page.rail == item.id %} active{% endif %}"
-       {% if page.rail == item.id %}aria-current="page"{% endif %}>
-      <span class="rail-badge{% if item.is_brand %} brand-badge{% endif %}">{{ item.icon }}</span>
-      <span class="rail-label">{{ item.label }}</span>
-    </a>
+  {% set isActive = (page.rail and page.rail == item.id) or (page.url == (item.url | url)) %}
+  <a href="{{ item.url | url }}"
+     class="rail-item{% if isActive %} active{% endif %}"
+     {% if isActive %}aria-current="page"{% endif %}>
+    <span class="rail-badge{% if item.is_brand %} brand-badge{% endif %}" aria-hidden="true">{{ item.icon }}</span>
+    <span class="rail-label">{{ item.label }}</span>
+  </a>
   {% endfor %}
 </nav>
