@@ -1,0 +1,11 @@
+{
+  "name": "My Eleventy Site",
+  "description": "A clean, fast static site built with Eleventy.",
+  "author": "Your Name",
+  "year": 2026,
+  "nav": [
+    { "label": "Home", "url": "/" },
+    { "label": "Blog", "url": "/blog/" },
+    { "label": "About", "url": "/about/" }
+  ]
+}
