@@ -1,0 +1,10 @@
+<aside class="nav-drawer" id="nav-drawer" :class="{ 'open': navOpen }">
+  <div class="drawer-header"><strong>{{ site.title }}</strong></div>
+  <nav class="drawer-nav" aria-label="Main navigation">
+    {% for link in sidebar_nav %}
+      <a href="{{ link.url | url }}" class="drawer-link{% if page.url == link.url %} active{% endif %}">
+        <span aria-hidden="true">{{ link.icon }}</span>{{ link.label }}
+      </a>
+    {% endfor %}
+  </nav>
+</aside>

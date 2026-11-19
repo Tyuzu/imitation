@@ -1,25 +1,35 @@
 export default function (eleventyConfig) {
-  // Copy static assets directly to _site/assets/
-  eleventyConfig.addPassthroughCopy("src/assets");
+  eleventyConfig.addPassthroughCopy({ "src/assets": "assets" });
 
-  // Custom date filter for readable post dates
-  eleventyConfig.addFilter("readableDate", (dateObj) => {
-    return new Date(dateObj).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      timeZone: "UTC",
-    });
+  eleventyConfig.addFilter("readableDate", (value) => {
+    const date = value instanceof Date ? value : new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    return new Intl.DateTimeFormat("en", {
+      year: "numeric", month: "long", day: "numeric", timeZone: "UTC"
+    }).format(date);
   });
+
+  eleventyConfig.addFilter("htmlDate", (value) => {
+    const date = value instanceof Date ? value : new Date(value);
+    return Number.isNaN(date.getTime()) ? "" : date.toISOString().slice(0, 10);
+  });
+
+  eleventyConfig.addFilter("jsonify", (value) => JSON.stringify(value));
+
+  eleventyConfig.addCollection("posts", (collectionApi) =>
+    collectionApi.getFilteredByTag("posts").sort((a, b) => b.date - a.date)
+  );
 
   return {
     dir: {
       input: "src",
       includes: "_includes",
       data: "_data",
-      output: "_site",
+      output: "_site"
     },
+    templateFormats: ["md", "njk", "html"],
     markdownTemplateEngine: "njk",
     htmlTemplateEngine: "njk",
+    dataTemplateEngine: "njk"
   };
 }

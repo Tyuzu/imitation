@@ -1,18 +1,62 @@
 <!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ title + " | " + site.name if title else site.name }}</title>
-    <meta name="description" content="{{ description or site.description }}" />
-    <link rel="stylesheet" href="/assets/css/style.css" />
-  </head>
-  <body>
-    {% include "partials/header.njk" %}
-    <main class="container">
-      {{ content | safe }}
-    </main>
-    {% include "partials/footer.njk" %}
-    <script src="/assets/js/main.js" defer></script>
-  </body>
+<html lang="{{ site.lang | default('en') }}" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ description | default(site.description) | escape }}">
+  <meta name="theme-color" content="#ffffff">
+  {% if site.url and site.url != "https://example.com" %}
+  <link rel="canonical" href="{{ site.url }}{{ page.url }}">
+  {% endif %}
+  <title>{% if title %}{{ title | escape }} | {% endif %}{{ site.title | escape }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | url }}">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+  <script defer src="{{ '/assets/js/main.js' | url }}"></script>
+</head>
+<body x-data="siteShell">
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="app-shell">
+    {% include "partials/rail.njk" %}
+    {% include "partials/sidebar.njk" %}
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="icon-btn mobile-only" type="button" @click="toggleNav"
+            :aria-expanded="navOpen.toString()" aria-controls="nav-drawer"
+            :aria-label="navOpen ? 'Close navigation' : 'Open navigation'">☰</button>
+          <a class="topbar-brand" href="{{ '/' | url }}">
+            <span class="brand-circle">{{ site.brand_letter }}</span>
+            <span>{{ site.title }}</span>
+          </a>
+        </div>
+        <div class="topbar-center" x-data="toolSearch">
+          <label class="visually-hidden" for="global-tool-search">Search tools</label>
+          <input id="global-tool-search" type="search" placeholder="Search tools..."
+            x-model="query" @input="search" @keydown.escape="clear">
+          <div class="search-dropdown" x-show="open" x-cloak>
+            <template x-for="item in matches" :key="item.url">
+              <a class="search-result-item" :href="item.url">
+                <span x-text="item.title"></span>
+                <small x-text="item.category"></small>
+              </a>
+            </template>
+            <p x-show="matches.length === 0">No matching tools</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="pill-btn" type="button" @click="toggleTheme"
+            :aria-pressed="dark.toString()" aria-label="Toggle color theme">◐</button>
+        </div>
+      </header>
+      <main id="main-content" class="workspace-main">
+        <div class="workspace-container">
+          {% if show_ads != false %}<div class="ad-slot" aria-label="Advertisement">ADVERTISEMENT</div>{% endif %}
+          {{ content | safe }}
+        </div>
+      </main>
+      {% include "partials/footer.njk" %}
+    </div>
+  </div>
+  <script id="tool-index-data" type="application/json">{{ footer_directory | jsonify | safe }}</script>
+</body>
 </html>

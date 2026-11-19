@@ -1,11 +1,13 @@
 {
-  "name": "My Eleventy Site",
-  "description": "A clean, fast static site built with Eleventy.",
-  "author": "Your Name",
-  "year": 2026,
-  "nav": [
-    { "label": "Home", "url": "/" },
-    { "label": "Blog", "url": "/blog/" },
-    { "label": "About", "url": "/about/" }
-  ]
+  "title": "Imigi Tools",
+  "name": "Imigi Tools",
+  "description": "Simple, fast, browser-based tools for images, PDFs and everyday tasks.",
+  "url": "https://example.com",
+  "lang": "en",
+  "author": {
+    "name": "Imigi Team",
+    "avatar": "/assets/images/logo.png"
+  },
+  "brand_letter": "I",
+  "copyright": "© 2026 Imigi Tools. All rights reserved."
 }

@@ -2,7 +2,8 @@
 layout: layouts/base.njk
 title: About
 ---
+# About {{ site.title }}
 
-# About Me
+{{ site.description }}
 
-Hi, I'm **{{ site.author }}**. This site is generated statically with Eleventy, shipping zero unnecessary JavaScript.
+This website is built with Eleventy. Its tools run in your browser wherever possible.

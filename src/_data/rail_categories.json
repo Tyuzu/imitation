@@ -1,0 +1,7 @@
+[
+  { "id": "home", "label": "Home", "url": "/", "icon": "⌂", "is_brand": true },
+  { "id": "images", "label": "Images", "url": "/image-compressor/", "icon": "▧" },
+  { "id": "pdf", "label": "PDF", "url": "/merge-pdf/", "icon": "▤" },
+  { "id": "video", "label": "Video", "url": "/video-studio/", "icon": "▷" },
+  { "id": "utilities", "label": "Utilities", "url": "/base64-to-image/", "icon": "⌘" }
+]

@@ -1,5 +1,18 @@
 <footer class="site-footer">
-  <div class="container">
-    <p>&copy; {{ site.year }} {{ site.author }}. Built with Eleventy.</p>
+  <div class="workspace-container">
+    <div class="footer-grid">
+      {% for col in footer_directory %}
+        <section class="footer-col">
+          <h2>{{ col.heading }}</h2>
+          <ul>{% for item in col.links %}
+            <li><a href="{{ item.url | url }}">{{ item.title }}</a></li>
+          {% endfor %}</ul>
+        </section>
+      {% endfor %}
+    </div>
+    <div class="footer-bottom">
+      <span>{{ site.copyright }}</span>
+      <span><a href="/privacy-policy/">Privacy</a> · <a href="/terms-of-service/">Terms</a></span>
+    </div>
   </div>
 </footer>

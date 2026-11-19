@@ -1,0 +1,6 @@
+[
+  { "label": "Home", "url": "/", "icon": "⌂" },
+  { "label": "Blog", "url": "/blog/", "icon": "▤" },
+  { "label": "About", "url": "/about/", "icon": "ⓘ" },
+  { "label": "Image Compressor", "url": "/image-compressor/", "icon": "▧" }
+]

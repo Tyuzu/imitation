@@ -1,0 +1,14 @@
+[
+  { "heading": "PAGES", "links": [
+    { "title": "Home", "url": "/" },
+    { "title": "About", "url": "/about/" },
+    { "title": "Blog", "url": "/blog/" }
+  ]},
+  { "heading": "IMAGE TOOLS", "links": [
+    { "title": "Image Compressor", "url": "/image-compressor/" }
+  ]},
+  { "heading": "RESOURCES", "links": [
+    { "title": "Privacy Policy", "url": "/privacy-policy/" },
+    { "title": "Terms of Service", "url": "/terms-of-service/" }
+  ]}
+]
